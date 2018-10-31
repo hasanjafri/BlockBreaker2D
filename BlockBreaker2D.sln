@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio for Mac
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlockBreaker2D", "Assembly-CSharp.csproj", "{8917CB1E-4397-63BF-E400-6739AC58D71B}"
 EndProject
 Global
