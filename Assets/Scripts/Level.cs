@@ -9,7 +9,7 @@ public class Level : MonoBehaviour {
     //Cached references
     SceneLoader sceneLoader;
 
-    public void CountBreakableBlocks()
+    public void CountBlocks()
     {
         breakableBlocks++;
     }

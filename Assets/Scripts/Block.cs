@@ -5,26 +5,50 @@ using UnityEngine;
 public class Block : MonoBehaviour {
 
     [SerializeField] AudioClip breakSound;
+    [SerializeField] GameObject blocksVFX;
 
     //Cached reference
     Level level;
 
     private void Start()
     {
+        CountBreakableBlocks();
+    }
+
+    private void CountBreakableBlocks()
+    {
         level = FindObjectOfType<Level>();
-        level.CountBreakableBlocks();
+        if (tag == "Breakable")
+        {
+            level.CountBlocks();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        DestroyBlock();
+        if (tag == "Breakable")
+        {
+            DestroyBlock();
+        }
     }
 
     private void DestroyBlock()
     {
-        AudioSource.PlayClipAtPoint(breakSound, Camera.main.transform.position);
         Destroy(gameObject);
         level.BlockDestroyed();
-        FindObjectOfType<GameStatus>().AddToScore();
+        PlayBlockDestroySFX();
+        TriggerVFX();
+    }
+
+    private void PlayBlockDestroySFX()
+    {
+        AudioSource.PlayClipAtPoint(breakSound, Camera.main.transform.position);
+        FindObjectOfType<GameSession>().AddToScore();
+    }
+
+    private void TriggerVFX()
+    {
+        GameObject VFX = Instantiate(blocksVFX, transform.position, transform.rotation);
+        Destroy(VFX, 1f);
     }
 }
